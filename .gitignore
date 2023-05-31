@@ -1,0 +1,3 @@
+projects/lib/*
+virtualenv_install.txt
+projects/pyvenv.cfg

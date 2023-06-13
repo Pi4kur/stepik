@@ -5,7 +5,19 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Django BLOG",
+            "name": "MIXAPPS",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/projects/mixapp_project/manage.py",
+            "args": [
+                "runserver",
+                "127.0.0.1:7878"
+            ],
+            "django": true,
+            "justMyCode": true
+        },
+        {
+            "name": "BLOG",
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/projects/my_first_blog/manage.py",
@@ -17,7 +29,7 @@
             "justMyCode": true
         },
         {
-            "name": "Python: Django HOROSCOPE",
+            "name": "HOROSCOPE",
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/projects/horo_scope/manage.py",

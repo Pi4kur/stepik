@@ -73,7 +73,7 @@ def get_info_about_sign(request, sign_zodiac: str):
             )
     initial_rus_dict()
     return (
-        HttpResponseNotFound(html_template_test(f'No such zodiac founded - {sign_zodiac}'))
+        redirect(reverse('upper-word', args=(sign_zodiac,)))
         if sign_zodiac not in ZODIACS_RUS
         else redirect(reverse('horoscope-name', args=(ZODIACS_RUS.get(sign_zodiac),)))
     )
@@ -109,15 +109,14 @@ def get_types(request):
 
 
 def get_info_about_type(request, element: str):
-    if element in ZOD_TYPES:
-        response = '<ol>'
-        for zodiac in ZOD_TYPES.get(element):
-            redirect_url = reverse('horoscope-name', args=(zodiac,))
-            response += f'<li><a href="{redirect_url}">{zodiac.title()}</a></li>'
-        response += '</ol>'
-        return HttpResponse(html_template_test(f'Zodiacs with element {element}', response))
-    else:
+    if element not in ZOD_TYPES:
         return HttpResponseNotFound(html_template_test(f'No such element founded - {element}'))
+    response = '<ol>'
+    for zodiac in ZOD_TYPES.get(element):
+        redirect_url = reverse('horoscope-name', args=(zodiac,))
+        response += f'<li><a href="{redirect_url}">{zodiac.title()}</a></li>'
+    response += '</ol>'
+    return HttpResponse(html_template_test(f'Zodiacs with element {element}', response))
 
 # Homework
 # Get zodiac by date function
@@ -146,3 +145,7 @@ def get_my_date_converter(request, cus_date: dt):
     month, day = cus_date.month, cus_date.day
     redirect_url = reverse('get_zodiac_by_birthday', args=(month, day))
     return HttpResponseRedirect(redirect_url)
+
+# Word to upper case converter function
+def str_to_upper_case(request, juststr):
+    return HttpResponse(f'Returning {juststr}')

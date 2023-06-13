@@ -33,6 +33,22 @@ class MyDateConverter:
 
 # Homework
 # Take string with words separated by commas without whitespace
-# Example: 'apple,banana,orange'
+# Example: 'apple,banana,orange' -> ['apple', 'banana', 'orange']
 class MySplitConverter:
-    regex = '()'
+    regex = r'(\w+,)+\w+'
+    
+    def to_python(self, value):
+        return value.split(',')
+    
+    def to_url(self, value):
+        return ','.join(value)
+
+
+class MyUpperConvertor:
+    regex = r'\b\w+\b'
+    
+    def to_python(self, value):
+        return value.upper()
+    
+    def to_url(self, value):
+        return value.lower()
